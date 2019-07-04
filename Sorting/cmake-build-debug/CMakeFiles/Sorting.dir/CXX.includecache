@@ -7,12 +7,16 @@
 #IncludeRegexTransform: 
 
 /Users/mikhail/CLionProjects/Sorting/main.cpp
-iostream
+fstream
 -
 vector
 -
 ctime
 -
 cstdlib
+-
+string
+-
+iostream
 -
 

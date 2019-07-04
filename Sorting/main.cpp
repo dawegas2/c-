@@ -8,6 +8,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -21,9 +22,9 @@ int insertion_sort(vector<int> a, int n); //insertion sort
 
 int insertion_binary_sort(vector<int> a, int n); //binary insertion sort
 
-int counting_sort(vector<int> a, int n, int max); //counting sort
+int counting_sort(vector<int> a, int n); //counting sort
 
-int radix_sort(vector<int> a, int n, int max); //radix sort
+int radix_sort(vector<int> a, int n); //radix sort
 
 int binarySearch(vector<int> a, int r, int x, int& k); //binary search
 
@@ -62,17 +63,30 @@ int main() {
 
 void writeInFile(vector<int> first, vector<int> second, vector<int> third, vector<int> fourth){
     ofstream file("Sorting.csv");
-    string heading = "Array size;Bubble(random from 0 to 9;Bubble(random from 0 to 10.000);Bubble(almost ordered);Bubble(reverse order);"
+    string line = "Array size;Bubble(random from 0 to 9;Bubble(random from 0 to 10.000);Bubble(almost ordered);Bubble(reverse order);"
                      "Bubble_A1(random from 0 to 9;Bubble_A1(random from 0 to 10.000);Bubble_A1(almost ordered);Bubble_A1(reverse order);"
                      "Bubble_A2(random from 0 to 9;Bubble_A2(random from 0 to 10.000);Bubble_A2(almost ordered);Bubble_A2(reverse order);"
                      "Insertion(random from 0 to 9;Insertion(random from 0 to 10.000);Insertion(almost ordered);Insertion(reverse order);"
                      "InsertionBinary(random from 0 to 9;InsertionBinary(random from 0 to 10.000);"
                      "InsertionBinary(almost ordered);InsertionBinary(reverse order);"
                      "Counting(random from 0 to 9;Counting(random from 0 to 10.000);Counting(almost ordered);Counting(reverse order);"
-                     "Radix(random from 0 to 9;Radix(random from 0 to 10.000);Radix(almost ordered);Radix(reverse order);\n;";
-    file << heading;
+                     "Radix(random from 0 to 9;Radix(random from 0 to 10.000);Radix(almost ordered);Radix(reverse order);\n";
+    file << line;
 
-    
+    for (int i = 1; i < 9; i++){
+        int n = 1000 * i;
+        file << n << ";" << bubble_sort(first, n) << ";" << bubble_sort(second, n) << ";" << bubble_sort(third, n) << ";" << bubble_sort(fourth, n) << ";"
+                << bubble_sort_A1(first, n) << ";" << bubble_sort_A1(second, n) << ";" << bubble_sort_A1(third, n) << ";" << bubble_sort_A1(fourth, n) << ";"
+                << bubble_sort_A2(first, n) << ";" << bubble_sort_A2(second, n) << ";" << bubble_sort_A2(third, n) << ";" << bubble_sort_A2(fourth, n) << ";"
+                << insertion_sort(first, n) << ";" << insertion_sort(second, n) << ";" << insertion_sort(third, n) << ";" << insertion_sort(fourth, n) << ";"
+                << insertion_binary_sort(first, n) << ";" << insertion_binary_sort(second, n) << ";" << insertion_binary_sort(third, n) << ";" << insertion_binary_sort(fourth, n) << ";"
+                << counting_sort(first, n) << ";" << counting_sort(second, n) << ";" << counting_sort(third, n) << ";" << counting_sort(fourth, n) << ";"
+                << radix_sort(first, n) << ";" << radix_sort(second, n) << ";" << radix_sort(third, n) << ";" << radix_sort(fourth, n) << ";";
+        if (i != 8)
+            file << "\n";
+    }
+
+    file.close();
 
 }
 
@@ -277,7 +291,7 @@ int radix_sort(vector<int> a, int n){
         }
         k += 2; // i =0; i < 10;
         for (int i = 0; i < 10; i ++){
-            k += 4; i < 10; i++; c[i] = 0;
+            k += 4; //i < 10; i++; c[i] = 0;
             c[i] = 0;
         }
     }
